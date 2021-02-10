@@ -38,8 +38,8 @@ const getRandomArrayElement = (elements) => {
   return elements[_.random(0, elements.length - 1)];
 };
 //создает массив объектов с привязкой к индексам массива
-const createNewArray = (arrLength, element) => {
-  return new Array(arrLength).fill(null).map((item, index) => element(index + 1));
+const createArrayOfEntities = (arrLength, entityCreator) => {
+  return new Array(arrLength).fill(null).map((item, index) => entityCreator(index + 1));
 };
 
 const getUniqueID = (array, startId, endId) => {
@@ -55,11 +55,11 @@ const MAX_PHOTO = 25;
 const MAX_COMMENTS = 3;
 const uniqueID = [];
 
-const descriptionComment = () => {
-  const createCommentMessage = (length) => {
+const commentCreator = () => {
+  const createCommentMessage = (numOfLines) => {
     const result = [];
-    for (let i = 0; i <= length; i++) {
-      result.push(MESSAGE[getRandom(0, MESSAGE.length - 1)]);
+    for (let i = 0; i <= numOfLines; i++) {
+      result.push(getRandomArrayElement(MESSAGE));
     }
     return result.join(' ');
   };
@@ -73,15 +73,13 @@ const descriptionComment = () => {
 };
 
 
-const descriptionPhoto = i => {
-  const createArrayOfComments = createNewArray(getRandom(1, MAX_COMMENTS), descriptionComment);
+const descriptionPhoto = (i) => {
   return {
     id: i,
     url: 'photos/' + i + '.jpg',
     description: getRandomArrayElement(DESCRIPTION),
     likes: getRandom(15, 200),
-    comments: createArrayOfComments,
+    comments: createArrayOfEntities(getRandom(1, MAX_COMMENTS), commentCreator),
   };
 }
-const getPhoto = createNewArray(MAX_PHOTO, descriptionPhoto);
-getPhoto;
+createArrayOfEntities(MAX_PHOTO, descriptionPhoto);
