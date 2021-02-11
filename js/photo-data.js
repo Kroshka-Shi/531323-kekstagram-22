@@ -27,15 +27,14 @@ const MESSAGE = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
+const MAX_PHOTO = 25;
+const MAX_COMMENTS = 3;
+const uniqueID = [];
 
 //создает массив объектов с привязкой к индексам массива
 const createArrayOfEntities = (arrLength, entityCreator) => {
   return new Array(arrLength).fill(null).map((item, index) => entityCreator(index + 1));
 };
-
-const MAX_PHOTO = 25;
-const MAX_COMMENTS = 3;
-const uniqueID = [];
 
 const commentCreator = () => {
   const createCommentMessage = (numOfLines) => {
@@ -63,5 +62,8 @@ const descriptionPhoto = (i) => {
     comments: createArrayOfEntities(getRandom(1, MAX_COMMENTS), commentCreator),
   };
 }
-
-createArrayOfEntities(MAX_PHOTO, descriptionPhoto);
+export {
+  MAX_PHOTO,
+  createArrayOfEntities,
+  descriptionPhoto
+}
