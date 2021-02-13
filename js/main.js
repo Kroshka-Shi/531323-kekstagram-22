@@ -4,11 +4,8 @@ import {
 } from './util.js';
 
 import {
-  MAX_PHOTO,
-  descriptionPhoto,
-  createArrayOfEntities
-} from './photo-data.js';
-
+  renderPictureList
+} from './template-picture.js';
 
 checkLengthComment('hello', MAX_LENGTH_COMMENT);
-createArrayOfEntities(MAX_PHOTO, descriptionPhoto);
+renderPictureList();

@@ -62,6 +62,7 @@ const descriptionPhoto = (i) => {
     comments: createArrayOfEntities(getRandom(1, MAX_COMMENTS), commentCreator),
   };
 }
+
 export {
   MAX_PHOTO,
   createArrayOfEntities,
