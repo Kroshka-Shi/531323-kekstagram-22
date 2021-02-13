@@ -4,11 +4,8 @@ import {
 } from './util.js';
 
 import {
-  MAX_PHOTO,
-  descriptionPhoto,
-  createArrayOfEntities
-} from './photo-data.js';
-
+  renderPrewiewPicturesList
+} from './prewiew-picture.js';
 
 checkLengthComment('hello', MAX_LENGTH_COMMENT);
-createArrayOfEntities(MAX_PHOTO, descriptionPhoto);
+renderPrewiewPicturesList();
