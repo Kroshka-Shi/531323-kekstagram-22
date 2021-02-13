@@ -4,8 +4,8 @@ import {
 } from './util.js';
 
 import {
-  renderPictureList
+  renderPrewiewPicturesList
 } from './prewiew-picture.js';
 
 checkLengthComment('hello', MAX_LENGTH_COMMENT);
-renderPictureList();
+renderPrewiewPicturesList();
