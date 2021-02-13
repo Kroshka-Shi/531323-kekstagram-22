@@ -1,19 +1,19 @@
 import {
   MAX_PHOTO,
-  descriptionPhoto,
+  photoData,
   createArrayOfEntities
 } from './photo-data.js';
 
-const descriptionPicture = createArrayOfEntities(MAX_PHOTO, descriptionPhoto);
+const picturesData = createArrayOfEntities(MAX_PHOTO, photoData);
 
 const pictureListElement = document.querySelector('.pictures')
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 
-const renderPictureList = () => {
-  const pictureListFragment = document.createDocumentFragment();
+const renderPrewiewPicturesList = () => {
+  const picturesListFragment = document.createDocumentFragment();
 
-  descriptionPicture.forEach(({
+  picturesData.forEach(({
     url,
     likes,
     comments,
@@ -22,12 +22,12 @@ const renderPictureList = () => {
     pictureItem.querySelector('.picture__img').src = url;
     pictureItem.querySelector('.picture__likes').textContent = likes;
     pictureItem.querySelector('.picture__comments').textContent = comments.length;
-    pictureListFragment.appendChild(pictureItem);
+    picturesListFragment.appendChild(pictureItem);
   });
 
-  pictureListElement.appendChild(pictureListFragment);
+  pictureListElement.appendChild(picturesListFragment);
 };
 
 export {
-  renderPictureList
+  renderPrewiewPicturesList
 };

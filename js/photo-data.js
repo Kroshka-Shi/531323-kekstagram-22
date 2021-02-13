@@ -53,7 +53,7 @@ const commentCreator = () => {
   }
 };
 
-const descriptionPhoto = (i) => {
+const photoData = (i) => {
   return {
     id: i,
     url: 'photos/' + i + '.jpg',
@@ -66,5 +66,5 @@ const descriptionPhoto = (i) => {
 export {
   MAX_PHOTO,
   createArrayOfEntities,
-  descriptionPhoto
+  photoData
 }

@@ -5,7 +5,7 @@ import {
 
 import {
   renderPictureList
-} from './template-picture.js';
+} from './prewiew-picture.js';
 
 checkLengthComment('hello', MAX_LENGTH_COMMENT);
 renderPictureList();
