@@ -28,7 +28,7 @@ const MESSAGE = [
 ];
 
 const MAX_PHOTO = 25;
-const MAX_COMMENTS = 3;
+const MAX_COMMENTS = 5;
 const uniqueID = [];
 
 //создает массив объектов с привязкой к индексам массива

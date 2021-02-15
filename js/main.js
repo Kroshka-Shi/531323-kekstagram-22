@@ -4,8 +4,14 @@ import {
 } from './util.js';
 
 import {
-  renderPrewiewPicturesList
+  renderPictures,
+  onPictureClick,
+  onPictureEnterPress
 } from './prewiew-picture.js';
 
 checkLengthComment('hello', MAX_LENGTH_COMMENT);
-renderPrewiewPicturesList();
+renderPictures();
+
+const pictures = document.querySelectorAll('a.picture');
+pictures.forEach(element => element.addEventListener('click', onPictureClick));
+pictures.forEach(element => element.addEventListener('keydown', onPictureEnterPress));

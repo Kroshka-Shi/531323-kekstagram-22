@@ -1,33 +1,45 @@
+
 import {
-  MAX_PHOTO,
-  photoData,
-  createArrayOfEntities
-} from './photo-data.js';
+  openPictureModal,
+  randomPhotoData
+} from './big-picture.js';
+import {
+  isEnterEvent
+} from './util.js';
 
-const picturesData = createArrayOfEntities(MAX_PHOTO, photoData);
+const pictureContainer = document.querySelector('.pictures');
+const pictureTemplateBlock = document.querySelector('#picture');
+const pictureTemplate = pictureTemplateBlock.content.querySelector('a.picture');
 
-const pictureListElement = document.querySelector('.pictures')
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const renderPicture = (photoData) => {
+  let element = pictureTemplate.cloneNode(true);
+  element.dataset.photoId = photoData.id;
+  element.querySelector('.picture__img').src = photoData.url;
+  element.querySelector('.picture__comments').innerText = photoData.comments.length;
+  element.querySelector('.picture__likes').innerText = photoData.likes;
+  return element;
+};
 
+const renderPictures = () => {
+  let fragment = document.createDocumentFragment();
+  randomPhotoData.forEach(element => fragment.appendChild(renderPicture(element)));
+  pictureContainer.appendChild(fragment);
+};
 
-const renderPrewiewPicturesList = () => {
-  const picturesListFragment = document.createDocumentFragment();
+const onPictureClick = (evt) => {
+  evt.preventDefault();
+  openPictureModal(evt);
+};
 
-  picturesData.forEach(({
-    url,
-    likes,
-    comments,
-  }) => {
-    const pictureItem = pictureTemplate.cloneNode(true);
-    pictureItem.querySelector('.picture__img').src = url;
-    pictureItem.querySelector('.picture__likes').textContent = likes;
-    pictureItem.querySelector('.picture__comments').textContent = comments.length;
-    picturesListFragment.appendChild(pictureItem);
-  });
-
-  pictureListElement.appendChild(picturesListFragment);
+const onPictureEnterPress = (evt) => {
+  if (isEnterEvent(evt)) {
+    evt.preventDefault();
+    openPictureModal(evt);
+  }
 };
 
 export {
-  renderPrewiewPicturesList
+  renderPictures,
+  onPictureClick,
+  onPictureEnterPress
 };
