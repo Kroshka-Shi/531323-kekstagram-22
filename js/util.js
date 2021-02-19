@@ -25,10 +25,20 @@ const getUniqueArr = (array, startInd, endInd) => {
   return uniqueId;
 }
 
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+const isEnterEvent = (evt) => {
+  return evt.key === 'Enter';
+};
+
 export {
   MAX_LENGTH_COMMENT,
   checkLengthComment,
   getRandom,
   getRandomArrayElement,
-  getUniqueArr
+  getUniqueArr,
+  isEscEvent,
+  isEnterEvent
 };
