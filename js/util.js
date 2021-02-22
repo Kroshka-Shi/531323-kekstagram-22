@@ -6,7 +6,7 @@ const checkLengthComment = (comment, maxLength) => {
 }
 
 //Функция получения радномного числа из диапазона
-const getRandom = function(min, max) {
+const getRandom = function (min, max) {
   return _.random(min, max);
 };
 
@@ -25,10 +25,25 @@ const getUniqueArr = (array, startInd, endInd) => {
   return uniqueId;
 }
 
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+const isEnterEvent = (evt) => {
+  return evt.key === 'Enter';
+};
+const getIntValue = (element) => {
+  const valueString = element.value;
+  return window.parseInt(valueString);
+};
+
 export {
   MAX_LENGTH_COMMENT,
   checkLengthComment,
   getRandom,
   getRandomArrayElement,
-  getUniqueArr
+  getUniqueArr,
+  isEscEvent,
+  isEnterEvent,
+  getIntValue
 };

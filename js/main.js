@@ -1,11 +1,19 @@
 import {
-  MAX_LENGTH_COMMENT,
-  checkLengthComment
-} from './util.js';
-
-import {
-  renderPrewiewPicturesList
+  renderPictures,
+  onPictureClick,
+  onPictureEnterPress
 } from './prewiew-picture.js';
+import {
+  fileInputElement,
+  openUploadModal
+} from './upload-picture.js';
 
-checkLengthComment('hello', MAX_LENGTH_COMMENT);
-renderPrewiewPicturesList();
+renderPictures();
+
+//оставляю так для наглядности, возможно в будущем удалится, пересмотреть на финальной стадии.
+const pictures = document.querySelectorAll('a.picture');
+pictures.forEach(element => element.addEventListener('click', onPictureClick));
+pictures.forEach(element => element.addEventListener('keydown', onPictureEnterPress));
+
+
+fileInputElement.addEventListener('change', openUploadModal);
