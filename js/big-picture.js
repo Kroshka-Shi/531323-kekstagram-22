@@ -69,7 +69,7 @@ const getDataModal = (evt) => {
   const photoId = getPhotoId(evt);
   const pictureDataID = getPhotoDataById(photoId);
   renderPictureModalData(pictureDataID);
- 
+
 }
 
 const openPictureModal = (evt) => {
