@@ -1,17 +1,29 @@
 import {
-  MAX_LENGTH_COMMENT,
-  checkLengthComment
-} from './util.js';
-
-import {
   renderPictures,
-  onPictureClick,
+  onОpenPictureModal,
   onPictureEnterPress
-} from './prewiew-picture.js';
+} from './preview-picture.js';
+import {
+  fileInputElement,
+  onopenUploadModal
+} from './upload-picture.js';
 
-checkLengthComment('hello', MAX_LENGTH_COMMENT);
 renderPictures();
 
-const pictures = document.querySelectorAll('a.picture');
-pictures.forEach(element => element.addEventListener('click', onPictureClick));
-pictures.forEach(element => element.addEventListener('keydown', onPictureEnterPress));
+const pictureWrap = document.querySelector('.pictures');
+
+pictureWrap.addEventListener('click', (evt) => {
+  if (evt.target && evt.target.classList.contains('picture__img')) {
+    evt.preventDefault();
+    onОpenPictureModal(evt);
+  }
+});
+
+pictureWrap.addEventListener('keydown', (evt) => {
+  if (evt.target && evt.target.classList.contains('picture')) {
+    evt.preventDefault();
+    onPictureEnterPress(evt);
+  }
+});
+
+fileInputElement.addEventListener('change', onopenUploadModal);

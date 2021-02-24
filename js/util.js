@@ -1,9 +1,6 @@
-//Функция для проверки максимальной длины строки. Максимальная длина по проекту константа
-
-const MAX_LENGTH_COMMENT = 140;
-const checkLengthComment = (comment, maxLength) => {
-  return comment.length <= maxLength;
-}
+const checkLengthComment = (string = '', maxLength=0) => {
+  return string.length <= maxLength;
+};
 
 //Функция получения радномного числа из диапазона
 const getRandom = function(min, max) {
@@ -32,13 +29,17 @@ const isEscEvent = (evt) => {
 const isEnterEvent = (evt) => {
   return evt.key === 'Enter';
 };
+const getIntValue = (element) => {
+  const valueString = element.value;
+  return parseInt(valueString);
+};
 
 export {
-  MAX_LENGTH_COMMENT,
   checkLengthComment,
   getRandom,
   getRandomArrayElement,
   getUniqueArr,
   isEscEvent,
-  isEnterEvent
+  isEnterEvent,
+  getIntValue
 };
