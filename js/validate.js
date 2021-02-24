@@ -20,7 +20,7 @@ import {
 
 const checkLength = (evt) => {
   if (!checkLengthComment(evt.target.value, MAX_LENGTH_COMMENT)) {
-    evt.target.setCustomValidity('Комментарий не может быть больше ' + MAX_LENGTH_COMMENT + ' символов, удалите ' + evt.target.value - MAX_LENGTH_COMMENT);
+    evt.target.setCustomValidity('Комментарий не может быть больше ' + MAX_LENGTH_COMMENT + ' символов');
   } else {
     evt.target.setCustomValidity('');
   }

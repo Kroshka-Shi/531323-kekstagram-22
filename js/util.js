@@ -5,7 +5,7 @@ const checkLengthComment = (string = '', maxLength=0) => {
 };
 
 //Функция получения радномного числа из диапазона
-const getRandom = function (min, max) {
+const getRandom = function(min, max) {
   return _.random(min, max);
 };
 
