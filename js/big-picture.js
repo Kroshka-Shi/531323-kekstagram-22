@@ -8,7 +8,7 @@ import {
 
 import {
   MAX_PHOTO
-} from './constans.js'
+} from './constants.js'
 
 const bigPictureListElement = document.querySelector('.big-picture');
 const bigPictureImageElement = bigPictureListElement.querySelector('img');
@@ -61,46 +61,51 @@ const getPhotoId = (evt) => {
 
 const getPhotoDataById = (photoId) => {
   return randomPhotoData.find((element) => {
-    return element.id == photoId; //не работает при строгом сравнении
+    return element.id === parseInt(photoId); //не работает при строгом сравнении
   });
 };
 
 const getDataModal = (evt) => {
   const photoId = getPhotoId(evt);
   const pictureDataID = getPhotoDataById(photoId);
+  if (!pictureDataID) {
+    return;
+  }
   renderPictureModalData(pictureDataID);
 
 }
 
-const openPictureModal = (evt) => {
+const onopenPictureModal = (evt) => {
   getDataModal(evt);
   bigPictureListElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
   bigPictureCommentCountBlockElement.classList.add('hidden');
   bigPictureCommentsLoaderElement.classList.add('hidden');
 
-  bigPictureCloseElement.addEventListener('click', closePictureModal);
-  document.addEventListener('keydown', onPictureModalEscKeydown)
+  bigPictureCloseElement.addEventListener('click', onclosePictureModal);
+  document.addEventListener('keydown', onPictureModalEscKeydown);
+
 };
 
-const closePictureModal = () => {
+const onclosePictureModal = () => {
   bigPictureListElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   bigPictureCommentCountBlockElement.classList.remove('hidden');
   bigPictureCommentsLoaderElement.classList.remove('hidden');
 
-  bigPictureCloseElement.removeEventListener('click', closePictureModal);
-  document.removeEventListener('keydown', onPictureModalEscKeydown)
+  bigPictureCloseElement.removeEventListener('click', onclosePictureModal);
+  document.removeEventListener('keydown', onPictureModalEscKeydown);
 };
 
 const onPictureModalEscKeydown = (evt) => {
-  if (isEscEvent(evt)) {
-    evt.preventDefault();
-    closePictureModal();
+  if (!isEscEvent(evt)) {
+    return;
   }
+  evt.preventDefault();
+  onclosePictureModal();
 };
 
 export {
-  openPictureModal,
+  onopenPictureModal,
   randomPhotoData
 };

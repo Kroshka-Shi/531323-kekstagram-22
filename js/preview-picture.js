@@ -1,5 +1,5 @@
 import {
-  openPictureModal,
+  onopenPictureModal,
   randomPhotoData
 } from './big-picture.js';
 import {
@@ -25,20 +25,16 @@ const renderPictures = () => {
   pictureContainerElement.appendChild(fragment);
 };
 
-const onPictureClick = (evt) => {
-  evt.preventDefault();
-  openPictureModal(evt);
-};
-
 const onPictureEnterPress = (evt) => {
-  if (isEnterEvent(evt)) {
-    evt.preventDefault();
-    openPictureModal(evt);
+  if (!isEnterEvent(evt)) {
+    return
   }
+  evt.preventDefault();
+  onopenPictureModal(evt);
 };
 
 export {
   renderPictures,
-  onPictureClick,
+  onopenPictureModal,
   onPictureEnterPress
 };

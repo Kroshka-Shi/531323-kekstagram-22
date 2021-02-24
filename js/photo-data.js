@@ -5,14 +5,12 @@ import {
 } from './util.js';
 
 import {
-  uniqueID,
   MAX_COMMENTS,
   MESSAGE,
   NAME,
   DESCRIPTION
-} from './constans.js'
+} from './constants.js'
 
-//создает массив объектов с привязкой к индексам массива
 const createArrayOfEntities = (arrLength, entityCreator) => {
   return new Array(arrLength).fill(null).map((item, index) => entityCreator(index + 1));
 };
@@ -25,9 +23,8 @@ const commentCreator = () => {
     }
     return result.join(' ');
   };
-
   return {
-    id: getUniqueArr(uniqueID, 1, 1000),
+    id: getUniqueArr([], 1, 1000),
     avatar: 'img/avatar-' + (getRandom(1, 6)) + '.svg',
     message: createCommentMessage(getRandom(1, 2)),
     name: getRandomArrayElement(NAME),

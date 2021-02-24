@@ -10,6 +10,7 @@ env:
 
 globals:
   "_": true
+  "noUiSlider": true
 
 extends:
   "htmlacademy/vanilla"

@@ -23,7 +23,7 @@ const MESSAGE = [
 
 const MAX_PHOTO = 25;
 const MAX_COMMENTS = 5;
-const uniqueID = [];
+const MAX_LENGTH_COMMENT = 140;
 
 const CONTROL_MAX_VALUE = 100;
 const CONTROL_MIN_VALUE = 25;
@@ -90,10 +90,10 @@ export {
   EffectSliderSettings,
   ImageEffectStyles,
   EFFECT_CLASS_START,
-  uniqueID,
   MAX_COMMENTS,
   MAX_PHOTO,
   MESSAGE,
   NAME,
-  DESCRIPTION
+  DESCRIPTION,
+  MAX_LENGTH_COMMENT
 }

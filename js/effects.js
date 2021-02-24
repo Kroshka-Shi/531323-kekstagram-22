@@ -10,7 +10,7 @@ import {
   EffectSliderSettings,
   ImageEffectStyles,
   EFFECT_CLASS_START
-} from './constans.js'
+} from './constants.js'
 
 const imagePreviewElement = document.querySelector('.img-upload__preview img');
 const scaleControlValueElement = document.querySelector('.scale__control--value');
@@ -70,9 +70,7 @@ const removeEffectClasses = () => {
   const effectsList = getEffectList();
   effectsList.forEach((effect) => {
     const effectClassName = EFFECT_CLASS_START + effect;
-    if (imagePreviewElement.classList.contains(effectClassName)) {
-      imagePreviewElement.classList.remove(effectClassName);
-    }
+    imagePreviewElement.classList.toggle(effectClassName, false)
   });
 };
 
@@ -80,16 +78,14 @@ const onEffectsChange = (evt) => {
   if (evt.target && evt.target.matches('input[type="radio"]')) {
     removeEffectClasses();
     imageEffect = evt.target.value;
-    if (imageEffect !== 'none') {
-      const effectClass = EFFECT_CLASS_START + imageEffect;
-      updateEffectSlider(imageEffect);
-      imagePreviewElement.classList.add(effectClass);
-      if (effectLevelBarElement.classList.contains('hidden')) {
-        effectLevelBarElement.classList.remove('hidden');
-      }
-    } else {
+    if (imageEffect === 'none') {
       clearEffect();
+      return;
     }
+    const effectClass = EFFECT_CLASS_START + imageEffect;
+    updateEffectSlider(imageEffect);
+    imagePreviewElement.classList.add(effectClass);
+    effectLevelBarElement.classList.toggle('hidden', false)
   }
 };
 
@@ -105,7 +101,6 @@ const setImageEffectStyle = () => {
 };
 
 const createEffectSlider = () => {
-  // eslint-disable-next-line no-undef
   noUiSlider.create(effectLevelBarElement, {
     range: {
       min: 0,
@@ -115,13 +110,13 @@ const createEffectSlider = () => {
     step: 0.1,
     connect: 'lower',
     format: {
-      to: function (value) {
+      to: (value) => {
         if (Number.isInteger(value)) {
           return value.toFixed(0);
         }
         return value.toFixed(1);
       },
-      from: function (value) {
+      from: (value) => {
         return parseFloat(value);
       },
     },
