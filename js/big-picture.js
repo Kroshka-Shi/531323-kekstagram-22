@@ -61,7 +61,7 @@ const getPhotoId = (evt) => {
 
 const getPhotoDataById = (photoId) => {
   return randomPhotoData.find((element) => {
-    return element.id === parseInt(photoId); //не работает при строгом сравнении
+    return element.id === parseInt(photoId); 
   });
 };
 
@@ -75,25 +75,25 @@ const getDataModal = (evt) => {
 
 }
 
-const onopenPictureModal = (evt) => {
+const onOpenPictureModal = (evt) => {
   getDataModal(evt);
   bigPictureListElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
   bigPictureCommentCountBlockElement.classList.add('hidden');
   bigPictureCommentsLoaderElement.classList.add('hidden');
 
-  bigPictureCloseElement.addEventListener('click', onclosePictureModal);
+  bigPictureCloseElement.addEventListener('click', onClosePictureModal);
   document.addEventListener('keydown', onPictureModalEscKeydown);
 
 };
 
-const onclosePictureModal = () => {
+const onClosePictureModal = () => {
   bigPictureListElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   bigPictureCommentCountBlockElement.classList.remove('hidden');
   bigPictureCommentsLoaderElement.classList.remove('hidden');
 
-  bigPictureCloseElement.removeEventListener('click', onclosePictureModal);
+  bigPictureCloseElement.removeEventListener('click', onClosePictureModal);
   document.removeEventListener('keydown', onPictureModalEscKeydown);
 };
 
@@ -102,10 +102,10 @@ const onPictureModalEscKeydown = (evt) => {
     return;
   }
   evt.preventDefault();
-  onclosePictureModal();
+  onClosePictureModal();
 };
 
 export {
-  onopenPictureModal,
+  onOpenPictureModal,
   randomPhotoData
 };
