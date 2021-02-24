@@ -31,10 +31,13 @@ const isEscEvent = (evt) => {
 const isEnterEvent = (evt) => {
   return evt.key === 'Enter';
 };
+<<<<<<< HEAD
 const getIntValue = (element) => {
   const valueString = element.value;
   return parseInt(valueString);
 };
+=======
+>>>>>>> 7208d60607304a4ae4128ff35c9aa0b78a751df5
 
 export {
   checkLengthComment,
@@ -42,6 +45,10 @@ export {
   getRandomArrayElement,
   getUniqueArr,
   isEscEvent,
+<<<<<<< HEAD
   isEnterEvent,
   getIntValue
+=======
+  isEnterEvent
+>>>>>>> 7208d60607304a4ae4128ff35c9aa0b78a751df5
 };
