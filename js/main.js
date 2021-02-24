@@ -1,6 +1,6 @@
 import {
   renderPictures,
-  onOpenPictureModal,
+  onopenPictureModal,
   onPictureEnterPress
 } from './preview-picture.js';
 import {
@@ -15,7 +15,7 @@ const pictureWrap = document.querySelector('.pictures');
 pictureWrap.addEventListener('click', (evt) => {
   if (evt.target && evt.target.classList.contains('picture__img')) {
     evt.preventDefault();
-    onOpenPictureModal(evt);
+    onopenPictureModal(evt);
   }
 });
 

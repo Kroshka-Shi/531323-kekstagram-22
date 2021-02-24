@@ -1,5 +1,5 @@
 import {
-  onOpenPictureModal,
+  onopenPictureModal,
   randomPhotoData
 } from './big-picture.js';
 import {
@@ -30,11 +30,11 @@ const onPictureEnterPress = (evt) => {
     return
   }
   evt.preventDefault();
-  onOpenPictureModal(evt);
+  onopenPictureModal(evt);
 };
 
 export {
   renderPictures,
-  onOpenPictureModal,
+  onopenPictureModal,
   onPictureEnterPress
 };
