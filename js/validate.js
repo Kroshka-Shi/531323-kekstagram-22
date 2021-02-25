@@ -1,6 +1,3 @@
-/*2.3. Хэш-теги:
-    --один и тот же хэш-тег не может быть использован дважды;
-  */
 import {
   checkLengthComment
 } from './util.js';
@@ -19,12 +16,12 @@ const checkValidityComment = (evt) => {
   evt.target.reportValidity();
 }
 
-const isHashtag = (word) => {
+const checkFormTag = (word) => {
   const hashtagRegex = /^#[а-яА-ЯёЁa-zA-Z0-9]{1,19}$/; // (вначале нет # и недопуст символы и блина больше 20)
   return hashtagRegex.test(word);
 };
 
-const isUniqueTag = (array) => {
+const checkUniqueTag = (array) => {
   const hashtagLower = array.map(elem => {
     return elem.toLowerCase();
   });
@@ -37,8 +34,8 @@ const checkValidityHashtag = (evt) => {
   const hashtagArray = hashtagArrOrigin.filter(elem => elem !== ''); //зачищаем если больше 1 пробела
 
   const hashtagErrorCount = hashtagArray.length > MAX_COUNT_HASHTAG //флаг если больше 5 тэгов
-  const hashtagErrorFormat = !hashtagArray.every(isHashtag); //флаг на неверный формат 
-  const hashtagErrorUniq = !isUniqueTag(hashtagArray);// флаг уникальности
+  const hashtagErrorFormat = !hashtagArray.every(checkFormTag); //флаг на неверный формат 
+  const hashtagErrorUniq = !checkUniqueTag(hashtagArray);// флаг уникальности
 
  
   if (hashtagErrorFormat) {
@@ -54,7 +51,6 @@ const checkValidityHashtag = (evt) => {
   }
 
   evt.target.reportValidity();
-  
 }
 
 

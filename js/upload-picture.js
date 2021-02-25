@@ -49,14 +49,12 @@ const onCloseUploadModal = () => {
 
   commentInputElement.removeEventListener('input', checkValidityComment);
   hashtagInputElement.removeEventListener('input', checkValidityHashtag);
-
-  closeEffectSlider();
+  
   fileInputElement.value = '';
   commentInputElement.value = '';
   hashtagInputElement.value = '';
+  closeEffectSlider();
 };
-
-
 const onOpenUploadModal = () => {
   imgUploadOverlayElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -72,8 +70,8 @@ const onOpenUploadModal = () => {
   hashtagInputElement.addEventListener('input', checkValidityHashtag);
 
   setPreviewDefaultScale();
-  clearEffect();
   createEffectSlider();
+  clearEffect();
 };
 
 export {

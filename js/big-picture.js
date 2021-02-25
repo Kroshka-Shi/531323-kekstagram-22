@@ -75,25 +75,25 @@ const getDataModal = (evt) => {
 
 }
 
-const onОpenPictureModal = (evt) => {
+const onOpenPictureModal = (evt) => {
   getDataModal(evt);
   bigPictureListElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
   bigPictureCommentCountBlockElement.classList.add('hidden');
   bigPictureCommentsLoaderElement.classList.add('hidden');
 
-  bigPictureCloseElement.addEventListener('click', onСlosePictureModal);
+  bigPictureCloseElement.addEventListener('click', onClosePictureModal);
   document.addEventListener('keydown', onPictureModalEscKeydown);
 
 };
 
-const onСlosePictureModal = () => {
+const onClosePictureModal = () => {
   bigPictureListElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   bigPictureCommentCountBlockElement.classList.remove('hidden');
   bigPictureCommentsLoaderElement.classList.remove('hidden');
 
-  bigPictureCloseElement.removeEventListener('click', onСlosePictureModal);
+  bigPictureCloseElement.removeEventListener('click', onClosePictureModal);
   document.removeEventListener('keydown', onPictureModalEscKeydown);
 };
 
@@ -102,10 +102,10 @@ const onPictureModalEscKeydown = (evt) => {
     return;
   }
   evt.preventDefault();
-  onСlosePictureModal();
+  onClosePictureModal();
 };
 
 export {
-  onОpenPictureModal,
+  onOpenPictureModal,
   randomPhotoData
 };
