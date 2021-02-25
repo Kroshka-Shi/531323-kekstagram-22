@@ -12,7 +12,8 @@ import {
 } from './effects.js';
 
 import {
-  checkLength
+  checkValidityComment,
+  checkValidityHashtag
 } from './validate.js';
 
 const fileInputElement = document.querySelector('#upload-file');
@@ -23,47 +24,52 @@ const scaleControlSmallerButtonElement = document.querySelector('.scale__control
 const scaleControlBiggerButtonElement = document.querySelector('.scale__control--bigger');
 
 const commentInputElement = document.querySelector('.text__description');
+const hashtagInputElement = document.querySelector('.text__hashtags');
 
 const onUploadModalEscPress = (evt) => {
   if (!isEscEvent(evt)) {
     return;
   }
   evt.preventDefault();
-  const hashtagInputElement = document.querySelector('.text__hashtags');
   if (commentInputElement !== document.activeElement && hashtagInputElement !== document.activeElement) {
-    oncloseUploadModal();
+    onCloseUploadModal();
   }
 };
 
-const oncloseUploadModal = () => {
+const onCloseUploadModal = () => {
   imgUploadOverlayElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onUploadModalEscPress);
-  modalCloseButton.removeEventListener('click', oncloseUploadModal);
+  modalCloseButton.removeEventListener('click', onCloseUploadModal);
 
   scaleControlSmallerButtonElement.removeEventListener('click', scaleDown);
   scaleControlBiggerButtonElement.removeEventListener('click', scaleUp);
   uploadFormElement.removeEventListener('change', onEffectsChange);
 
-  commentInputElement.removeEventListener('input', checkLength);
+  commentInputElement.removeEventListener('input', checkValidityComment);
+  hashtagInputElement.removeEventListener('input', checkValidityHashtag);
 
   closeEffectSlider();
   fileInputElement.value = '';
+  commentInputElement.value = '';
+  hashtagInputElement.value = '';
 };
 
-const onopenUploadModal = () => {
+
+const onOpenUploadModal = () => {
   imgUploadOverlayElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onUploadModalEscPress);
-  modalCloseButton.addEventListener('click', oncloseUploadModal);
+  modalCloseButton.addEventListener('click', onCloseUploadModal);
 
   scaleControlSmallerButtonElement.addEventListener('click', scaleDown);
   scaleControlBiggerButtonElement.addEventListener('click', scaleUp);
   uploadFormElement.addEventListener('change', onEffectsChange);
 
-  commentInputElement.addEventListener('input', checkLength);
+  commentInputElement.addEventListener('input', checkValidityComment);
+  hashtagInputElement.addEventListener('input', checkValidityHashtag);
 
   setPreviewDefaultScale();
   clearEffect();
@@ -72,5 +78,5 @@ const onopenUploadModal = () => {
 
 export {
   fileInputElement,
-  onopenUploadModal
+  onOpenUploadModal
 };

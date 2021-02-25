@@ -5,25 +5,25 @@ import {
 } from './preview-picture.js';
 import {
   fileInputElement,
-  onopenUploadModal
+  onOpenUploadModal
 } from './upload-picture.js';
 
 renderPictures();
 
-const pictureWrap = document.querySelector('.pictures');
+const pictureWrapElement = document.querySelector('.pictures');
 
-pictureWrap.addEventListener('click', (evt) => {
+pictureWrapElement.addEventListener('click', (evt) => {
   if (evt.target && evt.target.classList.contains('picture__img')) {
     evt.preventDefault();
     onОpenPictureModal(evt);
   }
 });
 
-pictureWrap.addEventListener('keydown', (evt) => {
+pictureWrapElement.addEventListener('keydown', (evt) => {
   if (evt.target && evt.target.classList.contains('picture')) {
     evt.preventDefault();
     onPictureEnterPress(evt);
   }
 });
 
-fileInputElement.addEventListener('change', onopenUploadModal);
+fileInputElement.addEventListener('change', onOpenUploadModal);
