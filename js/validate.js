@@ -4,12 +4,17 @@ import {
 
 import {
   MAX_LENGTH_COMMENT,
-  MAX_COUNT_HASHTAG
+  MAX_COUNT_HASHTAG,
+  HASHTAG_REGEX,
+  FORMAT_ERROR_MESSAGE,
+  COUNT_ERROR_MESSAGE,
+  UNIQUE_ERROR_MESSAGE,
+  LENGTH_ERROR_MESSAGE
 } from './constants.js';
 
 const checkValidityComment = (evt) => {
   if (!checkLengthComment(evt.target.value, MAX_LENGTH_COMMENT)) {
-    evt.target.setCustomValidity('Комментарий не может быть больше ' + MAX_LENGTH_COMMENT + ' символов');
+    evt.target.setCustomValidity(LENGTH_ERROR_MESSAGE);
   } else {
     evt.target.setCustomValidity('');
   }
@@ -17,8 +22,7 @@ const checkValidityComment = (evt) => {
 }
 
 const checkFormTag = (word) => {
-  const hashtagRegex = /^#[а-яА-ЯёЁa-zA-Z0-9]{1,19}$/; // (вначале нет # и недопуст символы и блина больше 20)
-  return hashtagRegex.test(word);
+  return HASHTAG_REGEX.test(word);
 };
 
 const checkUniqueTag = (array) => {
@@ -31,26 +35,25 @@ const checkUniqueTag = (array) => {
 
 const checkValidityHashtag = (evt) => {
   const hashtagArrOrigin = evt.target.value.split(' ');
-  const hashtagArray = hashtagArrOrigin.filter(elem => elem !== ''); //зачищаем если больше 1 пробела
+  const hashtagArray = hashtagArrOrigin.filter(elem => elem !== '');
 
-  const hashtagErrorCount = hashtagArray.length > MAX_COUNT_HASHTAG //флаг если больше 5 тэгов
-  const hashtagErrorFormat = !hashtagArray.every(checkFormTag); //флаг на неверный формат 
-  const hashtagErrorUniq = !checkUniqueTag(hashtagArray);// флаг уникальности
+  const hashtagErrorCount = hashtagArray.length > MAX_COUNT_HASHTAG 
+  const hashtagErrorFormat = !hashtagArray.every(checkFormTag); 
+  const hashtagErrorUniq = !checkUniqueTag(hashtagArray);
 
- 
+
   if (hashtagErrorFormat) {
-    evt.target.setCustomValidity(`Хэштег должен начинаться с # и состоять из букв и чисел,
-    и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), 
-    символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т.д`);
+    evt.target.setCustomValidity(FORMAT_ERROR_MESSAGE);
   } else if (hashtagErrorCount) {
-    evt.target.setCustomValidity(`Максимальное колличество хэштегов ${MAX_COUNT_HASHTAG}`);
+    evt.target.setCustomValidity(COUNT_ERROR_MESSAGE);
   } else if (hashtagErrorUniq) {
-    evt.target.setCustomValidity('Хэштег должен быть уникальным.');
+    evt.target.setCustomValidity(UNIQUE_ERROR_MESSAGE);
   } else {
     evt.target.setCustomValidity('');
   }
 
   evt.target.reportValidity();
+  //поработать с пробелами в отправке на сервер как останется время
 }
 
 

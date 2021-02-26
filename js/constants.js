@@ -28,14 +28,18 @@ const MESSAGE = [
 
 const MAX_PHOTO = 25;
 const MAX_COMMENTS = 5;
+
 const MAX_LENGTH_COMMENT = 140;
 const MAX_COUNT_HASHTAG = 5;
+const HASHTAG_REGEX = /^#[^\W_]{1,19}$/;
 
 const CONTROL_MAX_VALUE = 100;
 const CONTROL_MIN_VALUE = 25;
 const CONTROL_STEP = 25;
 const CONTROL_DEFAULT_VALUE = 100;
 const EFFECT_CLASS_START = 'effects__preview--';
+
+
 
 const EffectSliderSettings = {
   'CHROME': {
@@ -87,6 +91,12 @@ const ImageEffectStyles = {
   'HEAT': 'brightness',
 };
 
+const FORMAT_ERROR_MESSAGE = `Хэштег должен начинаться с # и состоять из букв и чисел,
+и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), 
+символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т.д`;
+const COUNT_ERROR_MESSAGE = `Максимальное колличество хэштегов ${MAX_COUNT_HASHTAG}`;
+const UNIQUE_ERROR_MESSAGE = 'Хэштег должен быть уникальным.';
+const LENGTH_ERROR_MESSAGE = 'Комментарий не может быть больше ' + MAX_LENGTH_COMMENT + ' символов';
 
 export {
   CONTROL_MAX_VALUE,
@@ -102,5 +112,10 @@ export {
   NAME,
   DESCRIPTION,
   MAX_LENGTH_COMMENT,
-  MAX_COUNT_HASHTAG
+  MAX_COUNT_HASHTAG,
+  HASHTAG_REGEX,
+  FORMAT_ERROR_MESSAGE,
+  COUNT_ERROR_MESSAGE,
+  UNIQUE_ERROR_MESSAGE,
+  LENGTH_ERROR_MESSAGE
 }
