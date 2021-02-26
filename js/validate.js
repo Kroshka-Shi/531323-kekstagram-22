@@ -1,32 +1,63 @@
-/*2.3. Хэш-теги:
-
-    --хэш-тег начинается с символа # (решётка);
-    --строка после решётки должна состоять из букв и чисел и не может содержать пробелы,
-    спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.;
-    --хеш-тег не может состоять только из одной решётки;
-    --максимальная длина одного хэш-тега 20 символов, включая решётку;
-    --хэш-теги нечувствительны к регистру: #ХэшТег и #хэштег считаются одним и тем же тегом;
-    --хэш-теги разделяются пробелами;
-    --один и тот же хэш-тег не может быть использован дважды;
-    --нельзя указать больше пяти хэш-тегов;
-  */
 import {
   checkLengthComment
 } from './util.js';
 
 import {
-  MAX_LENGTH_COMMENT
+  MAX_LENGTH_COMMENT,
+  MAX_COUNT_HASHTAG,
+  HASHTAG_REGEX,
+  FORMAT_ERROR_MESSAGE,
+  COUNT_ERROR_MESSAGE,
+  UNIQUE_ERROR_MESSAGE,
+  LENGTH_ERROR_MESSAGE
 } from './constants.js';
 
-const checkLength = (evt) => {
+const checkValidityComment = (evt) => {
   if (!checkLengthComment(evt.target.value, MAX_LENGTH_COMMENT)) {
-    evt.target.setCustomValidity('Комментарий не может быть больше ' + MAX_LENGTH_COMMENT + ' символов');
+    evt.target.setCustomValidity(LENGTH_ERROR_MESSAGE);
   } else {
     evt.target.setCustomValidity('');
   }
   evt.target.reportValidity();
 }
 
+const checkFormTag = (word) => {
+  return HASHTAG_REGEX.test(word);
+};
+
+const checkUniqueTag = (array) => {
+  const hashtagLower = array.map(elem => {
+    return elem.toLowerCase();
+  });
+  const uniqueArr = new Set(hashtagLower);
+  return array.length === uniqueArr.size;
+};
+
+const checkValidityHashtag = (evt) => {
+  const hashtagArrOrigin = evt.target.value.split(' ');
+  const hashtagArray = hashtagArrOrigin.filter(elem => elem !== '');
+
+  const hashtagErrorCount = hashtagArray.length > MAX_COUNT_HASHTAG 
+  const hashtagErrorFormat = !hashtagArray.every(checkFormTag); 
+  const hashtagErrorUniq = !checkUniqueTag(hashtagArray);
+
+
+  if (hashtagErrorFormat) {
+    evt.target.setCustomValidity(FORMAT_ERROR_MESSAGE);
+  } else if (hashtagErrorCount) {
+    evt.target.setCustomValidity(COUNT_ERROR_MESSAGE);
+  } else if (hashtagErrorUniq) {
+    evt.target.setCustomValidity(UNIQUE_ERROR_MESSAGE);
+  } else {
+    evt.target.setCustomValidity('');
+  }
+
+  evt.target.reportValidity();
+  //поработать с пробелами в отправке на сервер как останется время
+}
+
+
 export {
-  checkLength
+  checkValidityComment,
+  checkValidityHashtag
 }
