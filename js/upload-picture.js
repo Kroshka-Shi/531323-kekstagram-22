@@ -12,6 +12,8 @@ import {
 } from './effects.js';
 
 import {
+  hashtagInputElement,
+  commentInputElement,
   checkValidityComment,
   checkValidityHashtag
 } from './validate.js';
@@ -22,9 +24,6 @@ const modalCloseButton = document.querySelector('#upload-cancel');
 const uploadFormElement = document.querySelector('.img-upload__form');
 const scaleControlSmallerButtonElement = document.querySelector('.scale__control--smaller');
 const scaleControlBiggerButtonElement = document.querySelector('.scale__control--bigger');
-
-const commentInputElement = document.querySelector('.text__description');
-const hashtagInputElement = document.querySelector('.text__hashtags');
 
 const onUploadModalEscPress = (evt) => {
   if (!isEscEvent(evt)) {
@@ -49,7 +48,7 @@ const onCloseUploadModal = () => {
 
   commentInputElement.removeEventListener('input', checkValidityComment);
   hashtagInputElement.removeEventListener('input', checkValidityHashtag);
-  
+
   fileInputElement.value = '';
   commentInputElement.value = '';
   hashtagInputElement.value = '';
@@ -76,5 +75,6 @@ const onOpenUploadModal = () => {
 
 export {
   fileInputElement,
-  onOpenUploadModal
+  onOpenUploadModal,
+  onCloseUploadModal
 };
