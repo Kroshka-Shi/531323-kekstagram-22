@@ -1,10 +1,10 @@
 const getData = (url, onSuccess, onError) => {
   fetch(url)
-    .then((responce) => {
-      if (responce.ok) {
-        return responce.json();
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
       }
-      throw new Error(`${responce.status} ${responce.statusText}`);
+      throw new Error(`${response.status} ${response.statusText}`);
     })
     .then((data) => {
       onSuccess(data);
@@ -19,11 +19,11 @@ const sendData = (url, formData, onSuccess, onError) => {
     method: 'POST',
     body: formData,
   })
-    .then((responce) => {
-      if (responce.ok) {
-        return responce.json();
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
       }
-      throw new Error(`${responce.status} ${responce.statusText}`);
+      throw new Error(`${response.status} ${response.statusText}`);
     })
     .then(() => onSuccess())
     .catch((err) => {

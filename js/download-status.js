@@ -11,15 +11,15 @@ const errorMessageTemplateElement = document.querySelector('#error').content.que
 
 
 const onSuccessMessageEscPress = (evt) => {
-  if (isEscEvent(evt)) {
-    evt.preventDefault();
-    closeSuccessMessage();
+  if (!isEscEvent(evt)) {
+    return;
   }
+  evt.preventDefault();
+  closeSuccessMessage();
 };
 
 const onSuccessMessageOverlayClick = (evt) => {
-  const successMessage = document.querySelector('.success');
-  if (evt.target === successMessage) {
+  if (evt.target.classList.contains('success')) {
     closeSuccessMessage();
   }
 };
@@ -40,15 +40,15 @@ const openSuccessMessage = () => {
 }
 
 const onErrorMessageEscPress = (evt) => {
-  if (isEscEvent(evt)) {
-    evt.preventDefault();
-    closeErrorMessage();
+  if (!isEscEvent(evt)) {
+    return;
   }
+  evt.preventDefault();
+  closeErrorMessage();
 };
 
 const onErrorMessageOverlayClick = (evt) => {
-  const errorMessage = document.querySelector('.error');
-  if (evt.target === errorMessage) {
+  if (evt.target.classList.contains('error')) {
     closeErrorMessage();
   }
 };
@@ -78,3 +78,4 @@ export {
   openErrorMessage,
   openDownloadErrorAlert
 };
+
