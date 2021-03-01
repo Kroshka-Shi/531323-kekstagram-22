@@ -1,14 +1,12 @@
 import {
-  onOpenPictureModal,
-  randomPhotoData
+  onOpenPictureModal
 } from './big-picture.js';
 import {
   isEnterEvent
 } from './util.js';
 
 const pictureContainerElement = document.querySelector('.pictures');
-const pictureTemplateBlockElement = document.querySelector('#picture');
-const pictureTemplateElement = pictureTemplateBlockElement.content.querySelector('a.picture');
+const pictureTemplateElement = document.querySelector('#picture').content.querySelector('a.picture');
 
 const renderPicture = (photoData) => {
   const element = pictureTemplateElement.cloneNode(true);
@@ -19,9 +17,9 @@ const renderPicture = (photoData) => {
   return element;
 };
 
-const renderPictures = () => {
+const renderPictures = (photoData) => {
   const fragment = document.createDocumentFragment();
-  randomPhotoData.forEach(element => fragment.appendChild(renderPicture(element)));
+  photoData.forEach(element => fragment.appendChild(renderPicture(element)));
   pictureContainerElement.appendChild(fragment);
 };
 

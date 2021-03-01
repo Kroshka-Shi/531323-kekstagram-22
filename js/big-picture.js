@@ -1,14 +1,10 @@
 import {
   isEscEvent
 } from './util.js';
-import {
-  photoData,
-  createArrayOfEntities
-} from './photo-data.js';
 
 import {
-  MAX_PHOTO
-} from './constants.js'
+  getPhotosData
+} from './photo-data.js';
 
 const bigPictureListElement = document.querySelector('.big-picture');
 const bigPictureImageElement = bigPictureListElement.querySelector('img');
@@ -19,8 +15,6 @@ const bigPictureDescriptionElement = bigPictureListElement.querySelector('.socia
 const bigPictureCommentCountBlockElement = bigPictureListElement.querySelector('.social__comment-count');
 const bigPictureCommentsLoaderElement = bigPictureListElement.querySelector('.comments-loader');
 const bigPictureCloseElement = bigPictureListElement.querySelector('.big-picture__cancel');
-
-const randomPhotoData = createArrayOfEntities(MAX_PHOTO, photoData);
 
 const templateCommentElement = document.querySelector('#social__comment').content.querySelector('.social__comment');
 
@@ -60,7 +54,8 @@ const getPhotoId = (evt) => {
 };
 
 const getPhotoDataById = (photoId) => {
-  return randomPhotoData.find((element) => {
+  const photoData = getPhotosData();
+  return photoData.find((element) => {
     return element.id === parseInt(photoId);
   });
 };
@@ -106,6 +101,5 @@ const onPictureModalEscKeydown = (evt) => {
 };
 
 export {
-  onOpenPictureModal,
-  randomPhotoData
+  onOpenPictureModal
 };

@@ -1,26 +1,10 @@
-const checkLengthComment = (string = '', maxLength=0) => {
+import {
+  ALERT_SHOW_TIME
+} from './constants.js';
+
+const checkLengthComment = (string = '', maxLength = 0) => {
   return string.length <= maxLength;
 };
-
-//Функция получения радномного числа из диапазона
-const getRandom = function(min, max) {
-  return _.random(min, max);
-};
-
-/// из массивов
-const getRandomArrayElement = (elements) => {
-  return elements[_.random(0, elements.length - 1)];
-};
-
-// получение уникального массива из диапазона чисел
-const getUniqueArr = (array, startInd, endInd) => {
-  let uniqueId;
-  do {
-    uniqueId = getRandom(startInd, endInd);
-  } while (array.indexOf(uniqueId) >= 0)
-  array.push(uniqueId);
-  return uniqueId;
-}
 
 const isEscEvent = (evt) => {
   return evt.key === ('Escape' || 'Esc');
@@ -34,12 +18,32 @@ const getIntValue = (element) => {
   return parseInt(valueString);
 };
 
+const showAlert = (message) => { //Окно.при загрузке данных с сервера произошла ошибка запроса
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = '50%';
+  alertContainer.style.top = '50%';
+  alertContainer.style.transform = 'translate(-50%, -50%)';
+  alertContainer.style.padding = '70px 50px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.lineHeight = '2';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+
+  alertContainer.textContent = message;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+}
+
 export {
   checkLengthComment,
-  getRandom,
-  getRandomArrayElement,
-  getUniqueArr,
   isEscEvent,
   isEnterEvent,
-  getIntValue
+  getIntValue,
+  showAlert
 };
