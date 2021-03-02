@@ -17,10 +17,27 @@ const renderPicture = (photoData) => {
   return element;
 };
 
+const onPictureEvt = () => {
+  const pictureWrapElement = document.querySelector('.pictures');
+  pictureWrapElement.addEventListener('click', (evt) => {
+    if (evt.target && evt.target.classList.contains('picture__img')) {
+      evt.preventDefault();
+      onOpenPictureModal(evt);
+    }
+  });
+  pictureWrapElement.addEventListener('keydown', (evt) => {
+    if (evt.target && evt.target.classList.contains('picture')) {
+      evt.preventDefault();
+      onPictureEnterPress(evt);
+    }
+  });
+}
+
 const renderPictures = (photoData) => {
   const fragment = document.createDocumentFragment();
   photoData.forEach(element => fragment.appendChild(renderPicture(element)));
   pictureContainerElement.appendChild(fragment);
+  onPictureEvt();
 };
 
 const onPictureEnterPress = (evt) => {

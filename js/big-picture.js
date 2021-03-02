@@ -34,6 +34,7 @@ const renderComments = (commentsData) => {
   bigPictureCommentsBlockElement.innerHTML = '';
   bigPictureCommentsBlockElement.appendChild(fragment);
 }
+//сделать показ только первых 5 комментов и открытие остальных по кнопке ТЗ 4.6
 
 const renderPictureModalData = (pictureData) => {
   bigPictureImageElement.src = pictureData.url;

@@ -71,6 +71,9 @@ const DOWNLOAD_ERROR_MESSAGE = `Ошибка загрузки данных.
 const GET_DATA_URL = 'https://22.javascript.pages.academy/kekstagram/data';
 const SEND_DATA_URL = 'https://22.javascript.pages.academy/kekstagram';
 
+const RANDOM_PHOTO_COUNT = 10;
+const TIME_BOUNCE_DELETE = 500;
+
 export {
   CONTROL_MAX_VALUE,
   CONTROL_MIN_VALUE,
@@ -89,5 +92,7 @@ export {
   ALERT_SHOW_TIME,
   DOWNLOAD_ERROR_MESSAGE,
   GET_DATA_URL,
-  SEND_DATA_URL
+  SEND_DATA_URL,
+  RANDOM_PHOTO_COUNT,
+  TIME_BOUNCE_DELETE
 }
