@@ -10,9 +10,9 @@ import {
   TIME_BOUNCE_DELETE
 } from './constants.js';
 
-const buttonDefaultFilter = document.querySelector('#filter-default');
-const buttonRandomFilter = document.querySelector('#filter-random');
-const buttonDiscussedFilter = document.querySelector('#filter-discussed');
+const buttonDefaultFilterElement = document.querySelector('#filter-default');
+const buttonRandomFilterElement = document.querySelector('#filter-random');
+const buttonDiscussedFilterElement = document.querySelector('#filter-discussed');
 
 const clearButtonsActive = () => {
   const filterButtons = document.querySelectorAll('.img-filters__button');
@@ -29,7 +29,7 @@ const sortArray = (data, sortFunction) => {
 };
 
 const randomFilter = () => {
-  return _.random(0, 1);
+  return _.random(0, 2)-1; //без -1 не работает в Хроме?! а (0,1) не работает в Лисе
 }
 
 const clearPictures = () => {
@@ -48,7 +48,7 @@ const sortComment = (data) => {
 const onDefaultFilter = () => {
   const data = getPhotosData();
   clearButtonsActive();
-  buttonDefaultFilter.classList.add('img-filters__button--active');
+  buttonDefaultFilterElement.classList.add('img-filters__button--active');
   clearPictures();
   renderPictures(data);
 };
@@ -56,9 +56,9 @@ const onDefaultFilter = () => {
 const onRandomFilter = () => {
   const data = getPhotosData();
   const sortedData = sortArray(data, randomFilter);
-  const filterData = sortedData.slice(0, RANDOM_PHOTO_COUNT); //завести переменную
+  const filterData = sortedData.slice(0, RANDOM_PHOTO_COUNT);
   clearButtonsActive();
-  buttonRandomFilter.classList.add('img-filters__button--active');
+  buttonRandomFilterElement.classList.add('img-filters__button--active');
   clearPictures();
   renderPictures(filterData);
 }
@@ -67,21 +67,17 @@ const onDiscussedFilter = () => {
   const data = getPhotosData();
   const sortedData = sortComment(data);
   clearButtonsActive();
-  buttonDiscussedFilter.classList.add('img-filters__button--active');
+  buttonDiscussedFilterElement.classList.add('img-filters__button--active');
   clearPictures();
   renderPictures(sortedData);
 }
-//надо ли делать задержку у каждого фильтра? "меняется" только случайные, остальные статичны
-const onDefaultFilterThrottle = _.throttle(onDefaultFilter, TIME_BOUNCE_DELETE);
-const onRandomFilterThrottle = _.throttle(onRandomFilter,TIME_BOUNCE_DELETE);
-const onDiscussedFilterThrottle = _.throttle(onDiscussedFilter,TIME_BOUNCE_DELETE);
 
 const showFilterButtons = () => {
   const filters = document.querySelector('.img-filters');
   filters.classList.remove('img-filters--inactive');
-  buttonDefaultFilter.addEventListener('click', onDefaultFilterThrottle);
-  buttonRandomFilter.addEventListener('click', onRandomFilterThrottle);
-  buttonDiscussedFilter.addEventListener('click', onDiscussedFilterThrottle);
+  buttonDefaultFilterElement.addEventListener('click', _.throttle(onDefaultFilter, TIME_BOUNCE_DELETE));
+  buttonRandomFilterElement.addEventListener('click', _.throttle(onRandomFilter, TIME_BOUNCE_DELETE));
+  buttonDiscussedFilterElement.addEventListener('click', _.throttle(onDiscussedFilter, TIME_BOUNCE_DELETE));
 };
 
 export {

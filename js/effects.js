@@ -14,6 +14,7 @@ import {
 
 const imagePreviewElement = document.querySelector('.img-upload__preview img');
 const scaleControlValueElement = document.querySelector('.scale__control--value');
+
 const effectLevelBarElement = document.querySelector('.img-upload__effect-level');
 const effectLevelValueElement = document.querySelector('.effect-level__value');
 

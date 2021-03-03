@@ -52,7 +52,7 @@ const checkValidityHashtag = (evt) => {
   const hashtagArrOrigin = evt.target.value.split(' ');
   const hashtagArray = hashtagArrOrigin.filter(elem => elem !== '');
 
-  const hashtagErrorCount = hashtagArray.length > MAX_COUNT_HASHTAG
+  const hashtagErrorCount = hashtagArray.length > MAX_COUNT_HASHTAG;
   const hashtagErrorFormat = !hashtagArray.every(checkFormTag);
   const hashtagErrorUniq = !checkUniqueTag(hashtagArray);
 
