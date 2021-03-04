@@ -70,7 +70,7 @@ const EffectSliderSettings = {
     step: 0.1,
     start: 3,
   },
-}
+};
 const ImageEffectStyles = {
   'CHROME': 'grayscale',
   'SEPIA': 'sepia',

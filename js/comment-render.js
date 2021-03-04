@@ -17,24 +17,21 @@ let count = 1;
 
 const commentLoaderData = () => {
 
-  const openCommentFrom = count * MAX_LOAD_COMMENT;
-  count++;
-  const openCommentTo = count * MAX_LOAD_COMMENT;
+  const start = count++ * MAX_LOAD_COMMENT;
+  const end = count * MAX_LOAD_COMMENT;
 
-  const commentsDataSlice = commentsData.slice(openCommentFrom, openCommentTo);
-  const currentCountComment = commentsDataSlice.length + openCommentFrom;
+  const commentsDataSlice = commentsData.slice(start, end);
+  const currentCountComment = commentsDataSlice.length + start;
   const maxCountComment = bigPictureCommentCountElement.textContent;
   bigPictureCommentCountBlockElement.textContent = `${currentCountComment} из ${maxCountComment} комментариев`;
   renderComments(commentsDataSlice);
 
-  if (commentsData.length <= openCommentTo) {
+  if (commentsData.length <= end) {
     bigPictureCommentCountElement.textContent = commentsData.length;
     bigPictureCommentsLoaderElement.removeEventListener('click', commentLoaderData);
-    if (!bigPictureCommentsLoaderElement.classList.contains('hidden')) {
-      bigPictureCommentsLoaderElement.classList.add('hidden');
-    }
+    bigPictureCommentsLoaderElement.classList.toggle('hidden', true);
   }
-}
+};
 
 const commentLoader = () => {
   bigPictureCommentCountElement.textContent = commentsData.length;
@@ -43,17 +40,12 @@ const commentLoader = () => {
   commentLoaderData();
 
   if (commentsData.length <= MAX_LOAD_COMMENT) {
-    if (!bigPictureCommentsLoaderElement.classList.contains('hidden')) {
-      bigPictureCommentsLoaderElement.classList.add('hidden');
-    }
+    bigPictureCommentsLoaderElement.classList.toggle('hidden', true);
   } else {
     bigPictureCommentsLoaderElement.addEventListener('click', commentLoaderData);
-    if (!bigPictureCommentsLoaderElement.classList.contains('hidden')) {
-      return;
-    }
-    bigPictureCommentsLoaderElement.classList.remove('hidden');
+    bigPictureCommentsLoaderElement.classList.toggle('hidden', false);
   }
-}
+};
 
 const renderComments = (commentsData) => {
   const fragment = document.createDocumentFragment();
@@ -69,13 +61,18 @@ const renderComments = (commentsData) => {
     fragment.appendChild(element);
   });
   bigPictureCommentsBlockElement.appendChild(fragment);
-}
+};
 
-const renderPictureModalData = (pictureData) => {
-  bigPictureImageElement.src = pictureData.url;
-  bigPictureLikesElement.textContent = pictureData.likes;
-  bigPictureDescriptionElement.textContent = pictureData.description;
-  commentsData = pictureData.comments;
+const renderPictureModalData = ({
+  url,
+  likes,
+  description,
+  comments,
+}) => {
+  bigPictureImageElement.src = url;
+  bigPictureLikesElement.textContent = likes;
+  bigPictureDescriptionElement.textContent = description;
+  commentsData = comments;
   commentLoader();
 };
 
@@ -83,6 +80,3 @@ export {
   renderPictureModalData,
   bigPictureListElement
 }
-
-
-//этот модуль часть модуля big-picture, для лучшей читаемости, оставить или лучше вместе?

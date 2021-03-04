@@ -38,7 +38,7 @@ const getDataModal = (evt) => {
     return;
   }
   renderPictureModalData(pictureDataID);
-}
+};
 
 const onOpenPictureModal = (evt) => {
   getDataModal(evt);

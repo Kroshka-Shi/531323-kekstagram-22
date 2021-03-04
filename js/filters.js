@@ -14,23 +14,12 @@ const buttonDefaultFilterElement = document.querySelector('#filter-default');
 const buttonRandomFilterElement = document.querySelector('#filter-random');
 const buttonDiscussedFilterElement = document.querySelector('#filter-discussed');
 
-const clearButtonsActive = () => {
+const clearFiltersButton = () => {
   const filterButtons = document.querySelectorAll('.img-filters__button');
   filterButtons.forEach((button) => {
-    if (button.classList.contains('img-filters__button--active')) {
-      button.classList.remove('img-filters__button--active');
-    }
+    button.classList.toggle('img-filters__button--active', false);
   });
 };
-
-const sortArray = (data, sortFunction) => {
-  const sortedData = data.slice().sort(sortFunction)
-  return sortedData;
-};
-
-const randomFilter = () => {
-  return _.random(0, 2)-1; //без -1 не работает в Хроме?! а (0,1) не работает в Лисе
-}
 
 const clearPictures = () => {
   const pictures = document.querySelectorAll('.picture');
@@ -39,17 +28,27 @@ const clearPictures = () => {
   });
 };
 
-const sortComment = (data) => {
-  const sortedData = data.slice()
-    .sort((a, b) => (a.comments.length < b.comments.length && 1) || (a.comments.length > b.comments.length && -1) || 0);
-  return sortedData;
+const sortArray = (data, sortFunction) => {
+  return data.slice().sort(sortFunction);
+};
+
+const randomFilter = () => { //оставляю так, работает и ладно =)
+  return _.random(0, 2) - 1; //даже с самописными функциями с Math работает только (0, любое число) -1 ; для всех барузеров
+};
+
+const commentsFilter = (a, b) => {
+  return b.comments.length - a.comments.length
+};
+
+const clearFilters = (filterButton) => {
+  clearFiltersButton();
+  filterButton.classList.add('img-filters__button--active');
+  clearPictures();
 };
 
 const onDefaultFilter = () => {
   const data = getPhotosData();
-  clearButtonsActive();
-  buttonDefaultFilterElement.classList.add('img-filters__button--active');
-  clearPictures();
+  clearFilters(buttonDefaultFilterElement);
   renderPictures(data);
 };
 
@@ -57,20 +56,16 @@ const onRandomFilter = () => {
   const data = getPhotosData();
   const sortedData = sortArray(data, randomFilter);
   const filterData = sortedData.slice(0, RANDOM_PHOTO_COUNT);
-  clearButtonsActive();
-  buttonRandomFilterElement.classList.add('img-filters__button--active');
-  clearPictures();
+  clearFilters(buttonRandomFilterElement);
   renderPictures(filterData);
-}
+};
 
 const onDiscussedFilter = () => {
   const data = getPhotosData();
-  const sortedData = sortComment(data);
-  clearButtonsActive();
-  buttonDiscussedFilterElement.classList.add('img-filters__button--active');
-  clearPictures();
+  const sortedData = sortArray(data, commentsFilter);
+  clearFilters(buttonDiscussedFilterElement);
   renderPictures(sortedData);
-}
+};
 
 const showFilterButtons = () => {
   const filters = document.querySelector('.img-filters');

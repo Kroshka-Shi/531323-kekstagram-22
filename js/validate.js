@@ -18,7 +18,7 @@ import {
 } from './api.js';
 import {
   onCloseUploadModal
-} from './upload-picture.js'
+} from './upload-picture.js';
 
 const uploadFormElement = document.querySelector('.img-upload__form');
 const hashtagInputElement = document.querySelector('.text__hashtags');
@@ -45,7 +45,7 @@ const checkUniqueTag = (array) => {
   });
   const uniqueArr = new Set(hashtagLower);
   return array.length === uniqueArr.size;
-}
+};
 
 
 const checkValidityHashtag = (evt) => {
@@ -56,23 +56,25 @@ const checkValidityHashtag = (evt) => {
   const hashtagErrorFormat = !hashtagArray.every(checkFormTag);
   const hashtagErrorUniq = !checkUniqueTag(hashtagArray);
 
-  if (hashtagErrorFormat) {
-    evt.target.setCustomValidity(FORMAT_ERROR_MESSAGE);
-    hashtagInputElement.classList.add('border--error');
-  } else if (hashtagErrorCount) {
-    evt.target.setCustomValidity(COUNT_ERROR_MESSAGE);
-    hashtagInputElement.classList.add('border--error');
-  } else if (hashtagErrorUniq) {
-    evt.target.setCustomValidity(UNIQUE_ERROR_MESSAGE);
-    hashtagInputElement.classList.add('border--error');
-  } else {
-    evt.target.setCustomValidity('');
-    hashtagInputElement.classList.remove('border--error');
+  switch (true) {
+    case hashtagErrorFormat:
+      evt.target.setCustomValidity(FORMAT_ERROR_MESSAGE);
+      hashtagInputElement.classList.add('border--error');
+      break;
+    case hashtagErrorCount:
+      evt.target.setCustomValidity(COUNT_ERROR_MESSAGE);
+      hashtagInputElement.classList.add('border--error');
+      break;
+    case hashtagErrorUniq:
+      evt.target.setCustomValidity(UNIQUE_ERROR_MESSAGE);
+      hashtagInputElement.classList.add('border--error');
+      break;
+    default:
+      evt.target.setCustomValidity('');
+      hashtagInputElement.classList.remove('border--error');
   }
-
   evt.target.reportValidity();
-  //поработать с пробелами в отправке на сервер как останется время
-}
+};
 
 const setPhotoFormSubmit = (onSuccess, onError) => {
   uploadFormElement.addEventListener('submit', (evt) => {
@@ -81,7 +83,7 @@ const setPhotoFormSubmit = (onSuccess, onError) => {
     sendData(SEND_DATA_URL, formData, onSuccess, onError);
     onCloseUploadModal();
   })
-}
+};
 
 
 export {

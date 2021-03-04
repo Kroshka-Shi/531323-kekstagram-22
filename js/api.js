@@ -12,7 +12,7 @@ const getData = (url, onSuccess, onError) => {
     .catch((err) => {
       onError(err);
     })
-}
+};
 
 const sendData = (url, formData, onSuccess, onError) => {
   fetch(url, {
@@ -29,7 +29,7 @@ const sendData = (url, formData, onSuccess, onError) => {
     .catch((err) => {
       onError(err);
     })
-}
+};
 
 export {
   getData,

@@ -7,6 +7,7 @@ import {
 
 const pictureContainerElement = document.querySelector('.pictures');
 const pictureTemplateElement = document.querySelector('#picture').content.querySelector('a.picture');
+const pictureWrapElement = document.querySelector('.pictures');
 
 const renderPicture = (photoData) => {
   const element = pictureTemplateElement.cloneNode(true);
@@ -17,21 +18,21 @@ const renderPicture = (photoData) => {
   return element;
 };
 
+const checkClass = (evt, className, func) => {
+  if (evt.target && evt.target.classList.contains(className)) {
+    evt.preventDefault();
+    func(evt);
+  }
+};
+
 const onPictureEvt = () => {
-  const pictureWrapElement = document.querySelector('.pictures');
   pictureWrapElement.addEventListener('click', (evt) => {
-    if (evt.target && evt.target.classList.contains('picture__img')) {
-      evt.preventDefault();
-      onOpenPictureModal(evt);
-    }
+    checkClass(evt, 'picture__img', onOpenPictureModal);
   });
   pictureWrapElement.addEventListener('keydown', (evt) => {
-    if (evt.target && evt.target.classList.contains('picture')) {
-      evt.preventDefault();
-      onPictureEnterPress(evt);
-    }
+    checkClass(evt, 'picture', onPictureEnterPress)
   });
-}
+};
 
 const renderPictures = (photoData) => {
   const fragment = document.createDocumentFragment();

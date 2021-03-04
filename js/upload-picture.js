@@ -57,14 +57,19 @@ const uploadClientPicture = () => {
     });
 
     reader.readAsDataURL(file);
+    reader.removeEventListener('load', () => {
+      clientPictureElement.src = reader.result;
+    });
   }
-}
+};
 
-const clearInputValue = () => {
+const clearValidate = () => {
   fileInputElement.value = '';
   commentInputElement.value = '';
   hashtagInputElement.value = '';
-}
+  commentInputElement.classList.remove('border--error');
+  hashtagInputElement.classList.remove('border--error');
+};
 
 const onCloseUploadModal = () => {
   imgUploadOverlayElement.classList.add('hidden');
@@ -80,9 +85,10 @@ const onCloseUploadModal = () => {
   commentInputElement.removeEventListener('input', checkValidityComment);
   hashtagInputElement.removeEventListener('input', checkValidityHashtag);
 
-  clearInputValue();
+  clearValidate();
   closeEffectSlider();
 };
+
 const onOpenUploadModal = () => {
   uploadClientPicture();
   imgUploadOverlayElement.classList.remove('hidden');
