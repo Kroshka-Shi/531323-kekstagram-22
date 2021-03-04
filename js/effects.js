@@ -10,10 +10,11 @@ import {
   EffectSliderSettings,
   ImageEffectStyles,
   EFFECT_CLASS_START
-} from './constants.js'
+} from './constants.js';
 
 const imagePreviewElement = document.querySelector('.img-upload__preview img');
 const scaleControlValueElement = document.querySelector('.scale__control--value');
+
 const effectLevelBarElement = document.querySelector('.img-upload__effect-level');
 const effectLevelValueElement = document.querySelector('.effect-level__value');
 
@@ -62,7 +63,7 @@ const clearEffect = () => {
 const getEffectList = () => {
   const effectsList = [];
   const effectButtons = document.querySelectorAll('.effects__radio');
-  effectButtons.forEach(button => effectsList.push(button.value))
+  effectButtons.forEach(button => effectsList.push(button.value));
   return effectsList;
 };
 
@@ -85,7 +86,7 @@ const onEffectsChange = (evt) => {
     const effectClass = EFFECT_CLASS_START + imageEffect;
     updateEffectSlider(imageEffect);
     imagePreviewElement.classList.add(effectClass);
-    effectLevelBarElement.classList.toggle('hidden', false)
+    effectLevelBarElement.classList.toggle('hidden', false);
   }
 };
 
@@ -96,7 +97,7 @@ const setImageEffectStyle = () => {
   } else if (imageEffect === 'phobos') {
     effectValueName = 'px';
   }
-  imageEffectStyle = `filter: ${ImageEffectStyles[imageEffect.toUpperCase()]}(${effectLevelValueElement.value}${effectValueName});`;
+  imageEffectStyle = `filter: ${ImageEffectStyles[imageEffect.toUpperCase()]}(${effectLevelValueElement.value}${effectValueName})`;
   updateStyles(imagePreviewElement, imageScaleStyle + imageEffectStyle);
 };
 

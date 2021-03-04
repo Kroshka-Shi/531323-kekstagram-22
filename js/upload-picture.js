@@ -18,9 +18,15 @@ import {
   checkValidityHashtag
 } from './validate.js';
 
+import {
+  FILE_TYPES
+} from './constants.js';
+
 const fileInputElement = document.querySelector('#upload-file');
+const clientPictureElement = document.querySelector('.img-upload__preview img');
+
 const imgUploadOverlayElement = document.querySelector('.img-upload__overlay');
-const modalCloseButton = document.querySelector('#upload-cancel');
+const modalCloseButtonElement = document.querySelector('#upload-cancel');
 const uploadFormElement = document.querySelector('.img-upload__form');
 const scaleControlSmallerButtonElement = document.querySelector('.scale__control--smaller');
 const scaleControlBiggerButtonElement = document.querySelector('.scale__control--bigger');
@@ -35,12 +41,42 @@ const onUploadModalEscPress = (evt) => {
   }
 };
 
+const uploadClientPicture = () => {
+  const file = fileInputElement.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      clientPictureElement.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+    reader.removeEventListener('load', () => {
+      clientPictureElement.src = reader.result;
+    });
+  }
+};
+
+const clearValidate = () => {
+  fileInputElement.value = '';
+  commentInputElement.value = '';
+  hashtagInputElement.value = '';
+  commentInputElement.classList.remove('border--error');
+  hashtagInputElement.classList.remove('border--error');
+};
+
 const onCloseUploadModal = () => {
   imgUploadOverlayElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onUploadModalEscPress);
-  modalCloseButton.removeEventListener('click', onCloseUploadModal);
+  modalCloseButtonElement.removeEventListener('click', onCloseUploadModal);
 
   scaleControlSmallerButtonElement.removeEventListener('click', scaleDown);
   scaleControlBiggerButtonElement.removeEventListener('click', scaleUp);
@@ -49,17 +85,17 @@ const onCloseUploadModal = () => {
   commentInputElement.removeEventListener('input', checkValidityComment);
   hashtagInputElement.removeEventListener('input', checkValidityHashtag);
 
-  fileInputElement.value = '';
-  commentInputElement.value = '';
-  hashtagInputElement.value = '';
+  clearValidate();
   closeEffectSlider();
 };
+
 const onOpenUploadModal = () => {
+  uploadClientPicture();
   imgUploadOverlayElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onUploadModalEscPress);
-  modalCloseButton.addEventListener('click', onCloseUploadModal);
+  modalCloseButtonElement.addEventListener('click', onCloseUploadModal);
 
   scaleControlSmallerButtonElement.addEventListener('click', scaleDown);
   scaleControlBiggerButtonElement.addEventListener('click', scaleUp);

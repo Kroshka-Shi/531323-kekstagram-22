@@ -1,7 +1,5 @@
 import {
-  renderPictures,
-  onOpenPictureModal,
-  onPictureEnterPress
+  renderPictures
 } from './preview-picture.js';
 import {
   fileInputElement,
@@ -29,23 +27,14 @@ import {
   setPhotoFormSubmit
 } from './validate.js';
 
-const pictureWrapElement = document.querySelector('.pictures');
+import {
+  showFilterButtons
+} from './filters.js';
 
 const onPhotoDataLoaded = (photoData) => {
   setPhotosData(photoData);
   renderPictures(photoData);
-  pictureWrapElement.addEventListener('click', (evt) => {
-    if (evt.target && evt.target.classList.contains('picture__img')) {
-      evt.preventDefault();
-      onOpenPictureModal(evt);
-    }
-  });
-  pictureWrapElement.addEventListener('keydown', (evt) => {
-    if (evt.target && evt.target.classList.contains('picture')) {
-      evt.preventDefault();
-      onPictureEnterPress(evt);
-    }
-  });
+  showFilterButtons();
 };
 
 getData(GET_DATA_URL, onPhotoDataLoaded, openDownloadErrorAlert);
