@@ -1,6 +1,7 @@
 import {
   renderPictures
 } from './preview-picture.js';
+
 import {
   fileInputElement,
   onOpenUploadModal
