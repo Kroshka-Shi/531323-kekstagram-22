@@ -18,6 +18,7 @@ const LENGTH_ERROR_MESSAGE = 'Комментарий не может быть б
 const ALERT_SHOW_TIME = 5000;
 const DOWNLOAD_ERROR_MESSAGE = `Ошибка загрузки данных.
 Пожалуйста обратитесь к администратору сайта или попробуйте позже.`;
+const ERROR_BORDER_STYLE = 'border--error';
 
 const GET_DATA_URL = 'https://22.javascript.pages.academy/kekstagram/data';
 const SEND_DATA_URL = 'https://22.javascript.pages.academy/kekstagram';
@@ -71,6 +72,7 @@ const EffectSliderSettings = {
     start: 3,
   },
 };
+
 const ImageEffectStyles = {
   'CHROME': 'grayscale',
   'SEPIA': 'sepia',
@@ -101,5 +103,6 @@ export {
   RANDOM_PHOTO_COUNT,
   TIME_BOUNCE_DELETE,
   MAX_LOAD_COMMENT,
-  FILE_TYPES
+  FILE_TYPES,
+  ERROR_BORDER_STYLE
 }

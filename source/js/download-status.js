@@ -1,6 +1,7 @@
 import {
   isEscEvent
 } from './util.js';
+
 import {
   DOWNLOAD_ERROR_MESSAGE,
   ALERT_SHOW_TIME
@@ -82,7 +83,6 @@ const showAlert = (DOWNLOAD_ERROR_MESSAGE) => {
 const openDownloadErrorAlert = () => {
   showAlert(DOWNLOAD_ERROR_MESSAGE);
 };
-
 
 export {
   openSuccessMessage,

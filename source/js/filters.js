@@ -1,6 +1,7 @@
 import {
   getPhotosData
 } from './photo-data.js';
+
 import {
   renderPictures
 } from './preview-picture.js';
@@ -32,8 +33,8 @@ const sortArray = (data, sortFunction) => {
   return data.slice().sort(sortFunction);
 };
 
-const randomFilter = () => { //оставляю так, работает и ладно =)
-  return _.random(0, 2) - 1; //даже с самописными функциями с Math работает только (0, любое число) -1 ; для всех барузеров
+const randomFilter = () => { 
+  return _.random(0, 2) - 1; 
 };
 
 const commentsFilter = (a, b) => {

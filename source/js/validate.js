@@ -10,12 +10,14 @@ import {
   COUNT_ERROR_MESSAGE,
   UNIQUE_ERROR_MESSAGE,
   LENGTH_ERROR_MESSAGE,
-  SEND_DATA_URL
+  SEND_DATA_URL,
+  ERROR_BORDER_STYLE
 } from './constants.js';
 
 import {
   sendData
 } from './api.js';
+
 import {
   onCloseUploadModal
 } from './upload-picture.js';
@@ -47,7 +49,6 @@ const checkUniqueTag = (array) => {
   return array.length === uniqueArr.size;
 };
 
-
 const checkValidityHashtag = (evt) => {
   const hashtagArrOrigin = evt.target.value.split(' ');
   const hashtagArray = hashtagArrOrigin.filter(elem => elem !== '');
@@ -59,19 +60,19 @@ const checkValidityHashtag = (evt) => {
   switch (true) {
     case hashtagErrorFormat:
       evt.target.setCustomValidity(FORMAT_ERROR_MESSAGE);
-      hashtagInputElement.classList.add('border--error');
+      hashtagInputElement.classList.add(ERROR_BORDER_STYLE);
       break;
     case hashtagErrorCount:
       evt.target.setCustomValidity(COUNT_ERROR_MESSAGE);
-      hashtagInputElement.classList.add('border--error');
+      hashtagInputElement.classList.add(ERROR_BORDER_STYLE);
       break;
     case hashtagErrorUniq:
       evt.target.setCustomValidity(UNIQUE_ERROR_MESSAGE);
-      hashtagInputElement.classList.add('border--error');
+      hashtagInputElement.classList.add(ERROR_BORDER_STYLE);
       break;
     default:
       evt.target.setCustomValidity('');
-      hashtagInputElement.classList.remove('border--error');
+      hashtagInputElement.classList.remove(ERROR_BORDER_STYLE);
   }
   evt.target.reportValidity();
 };
@@ -84,7 +85,6 @@ const setPhotoFormSubmit = (onSuccess, onError) => {
     onCloseUploadModal();
   })
 };
-
 
 export {
   hashtagInputElement,

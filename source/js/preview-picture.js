@@ -1,6 +1,7 @@
 import {
   onOpenPictureModal
 } from './big-picture.js';
+
 import {
   isEnterEvent
 } from './util.js';

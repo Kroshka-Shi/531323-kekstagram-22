@@ -11,7 +11,6 @@ import {
   bigPictureListElement
 } from './comment-render.js';
 
-
 const bigPictureCloseElement = bigPictureListElement.querySelector('.big-picture__cancel');
 
 const getPhotoId = (evt) => {
