@@ -17,10 +17,9 @@ const getPhotoId = (evt) => {
   const target = evt.target;
   if (target.dataset.photoId !== undefined) {
     return target.dataset.photoId;
-  } else {
-    const parentTarget = target.parentNode;
-    return parentTarget.dataset.photoId;
   }
+  const parentTarget = target.parentNode;
+  return parentTarget.dataset.photoId;
 };
 
 const getPhotoDataById = (photoId) => {

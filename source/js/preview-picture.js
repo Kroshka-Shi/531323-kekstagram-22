@@ -26,20 +26,16 @@ const checkClass = (evt, className, func) => {
   }
 };
 
-const onPictureEvt = () => {
+const renderPictures = (photoData) => {
+  const fragment = document.createDocumentFragment();
+  photoData.forEach(element => fragment.appendChild(renderPicture(element)));
+  pictureContainerElement.appendChild(fragment);
   pictureWrapElement.addEventListener('click', (evt) => {
     checkClass(evt, 'picture__img', onOpenPictureModal);
   });
   pictureWrapElement.addEventListener('keydown', (evt) => {
     checkClass(evt, 'picture', onPictureEnterPress)
   });
-};
-
-const renderPictures = (photoData) => {
-  const fragment = document.createDocumentFragment();
-  photoData.forEach(element => fragment.appendChild(renderPicture(element)));
-  pictureContainerElement.appendChild(fragment);
-  onPictureEvt();
 };
 
 const onPictureEnterPress = (evt) => {

@@ -27,6 +27,10 @@ const onSuccessMessageOverlayClick = (evt) => {
 
 const closeSuccessMessage = () => {
   const successMessage = document.querySelector('.success');
+  const successButton = successMessage.querySelector('.success__button');
+  successButton.removeEventListener('click', closeSuccessMessage);
+  successMessage.removeEventListener('click', onSuccessMessageOverlayClick);
+  document.removeEventListener('keydown', onSuccessMessageEscPress);
   successMessage.remove();
 };
 
@@ -56,6 +60,10 @@ const onErrorMessageOverlayClick = (evt) => {
 
 const closeErrorMessage = () => {
   const errorMessage = document.querySelector('.error');
+  const errorButton = errorMessage.querySelector('.error__button');
+  errorButton.removeEventListener('click', closeErrorMessage);
+  errorMessage.removeEventListener('click', onErrorMessageOverlayClick);
+  document.removeEventListener('keydown', onErrorMessageEscPress);
   errorMessage.remove();
 };
 
@@ -70,9 +78,9 @@ const openErrorMessage = () => {
   document.addEventListener('keydown', onErrorMessageEscPress);
 };
 
-const showAlert = (DOWNLOAD_ERROR_MESSAGE) => {
+const showAlert = (alertMessage) => {
   const element = alertTemplateElement.cloneNode(true);
-  element.innerText = DOWNLOAD_ERROR_MESSAGE;
+  element.innerText = alertMessage;
   document.body.appendChild(element);
 
   setTimeout(() => {

@@ -15,7 +15,7 @@ const templateCommentElement = document.querySelector('#social__comment').conten
 let commentsData = {};
 let count = 1;
 
-const commentLoaderData = () => {
+const loadCommentData = () => {
 
   const start = count++ * MAX_LOAD_COMMENT;
   const end = count * MAX_LOAD_COMMENT;
@@ -28,21 +28,21 @@ const commentLoaderData = () => {
 
   if (commentsData.length <= end) {
     bigPictureCommentCountElement.textContent = commentsData.length;
-    bigPictureCommentsLoaderElement.removeEventListener('click', commentLoaderData);
+    bigPictureCommentsLoaderElement.removeEventListener('click', loadCommentData);
     bigPictureCommentsLoaderElement.classList.toggle('hidden', true);
   }
 };
 
-const commentLoader = () => {
+const loadComments = () => {
   bigPictureCommentCountElement.textContent = commentsData.length;
   bigPictureCommentsBlockElement.innerHTML = '';
   count = 0;
-  commentLoaderData();
+  loadCommentData();
 
   if (commentsData.length <= MAX_LOAD_COMMENT) {
     bigPictureCommentsLoaderElement.classList.toggle('hidden', true);
   } else {
-    bigPictureCommentsLoaderElement.addEventListener('click', commentLoaderData);
+    bigPictureCommentsLoaderElement.addEventListener('click', loadCommentData);
     bigPictureCommentsLoaderElement.classList.toggle('hidden', false);
   }
 };
@@ -73,7 +73,7 @@ const renderPictureModalData = ({
   bigPictureLikesElement.textContent = likes;
   bigPictureDescriptionElement.textContent = description;
   commentsData = comments;
-  commentLoader();
+  loadComments();
 };
 
 export {

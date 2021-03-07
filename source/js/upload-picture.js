@@ -64,7 +64,7 @@ const uploadClientPicture = () => {
   }
 };
 
-const clearValidate = () => {
+const clearValidityForm = () => {
   fileInputElement.value = '';
   commentInputElement.value = '';
   hashtagInputElement.value = '';
@@ -86,7 +86,7 @@ const onCloseUploadModal = () => {
   commentInputElement.removeEventListener('input', checkValidityComment);
   hashtagInputElement.removeEventListener('input', checkValidityHashtag);
 
-  clearValidate();
+  clearValidityForm();
   closeEffectSlider();
 };
 

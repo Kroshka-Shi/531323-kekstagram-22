@@ -15,7 +15,7 @@ const buttonDefaultFilterElement = document.querySelector('#filter-default');
 const buttonRandomFilterElement = document.querySelector('#filter-random');
 const buttonDiscussedFilterElement = document.querySelector('#filter-discussed');
 
-const clearFiltersButton = () => {
+const clearFilterButtons = () => {
   const filterButtons = document.querySelectorAll('.img-filters__button');
   filterButtons.forEach((button) => {
     button.classList.toggle('img-filters__button--active', false);
@@ -33,8 +33,8 @@ const sortArray = (data, sortFunction) => {
   return data.slice().sort(sortFunction);
 };
 
-const randomFilter = () => { 
-  return _.random(0, 2) - 1; 
+const getRandomFilter = () => {
+  return _.random(0, 2) - 1;
 };
 
 const commentsFilter = (a, b) => {
@@ -42,26 +42,26 @@ const commentsFilter = (a, b) => {
 };
 
 const clearFilters = (filterButton) => {
-  clearFiltersButton();
+  clearFilterButtons();
   filterButton.classList.add('img-filters__button--active');
   clearPictures();
 };
 
-const onDefaultFilter = () => {
+const applyDefaultFilter = () => {
   const data = getPhotosData();
   clearFilters(buttonDefaultFilterElement);
   renderPictures(data);
 };
 
-const onRandomFilter = () => {
+const applyRandomFilter = () => {
   const data = getPhotosData();
-  const sortedData = sortArray(data, randomFilter);
+  const sortedData = sortArray(data, getRandomFilter);
   const filterData = sortedData.slice(0, RANDOM_PHOTO_COUNT);
   clearFilters(buttonRandomFilterElement);
   renderPictures(filterData);
 };
 
-const onDiscussedFilter = () => {
+const applyDiscussedFilter = () => {
   const data = getPhotosData();
   const sortedData = sortArray(data, commentsFilter);
   clearFilters(buttonDiscussedFilterElement);
@@ -71,9 +71,9 @@ const onDiscussedFilter = () => {
 const showFilterButtons = () => {
   const filters = document.querySelector('.img-filters');
   filters.classList.remove('img-filters--inactive');
-  buttonDefaultFilterElement.addEventListener('click', _.throttle(onDefaultFilter, TIME_BOUNCE_DELETE));
-  buttonRandomFilterElement.addEventListener('click', _.throttle(onRandomFilter, TIME_BOUNCE_DELETE));
-  buttonDiscussedFilterElement.addEventListener('click', _.throttle(onDiscussedFilter, TIME_BOUNCE_DELETE));
+  buttonDefaultFilterElement.addEventListener('click', _.throttle(applyDefaultFilter, TIME_BOUNCE_DELETE));
+  buttonRandomFilterElement.addEventListener('click', _.throttle(applyRandomFilter, TIME_BOUNCE_DELETE));
+  buttonDiscussedFilterElement.addEventListener('click', _.throttle(applyDiscussedFilter, TIME_BOUNCE_DELETE));
 };
 
 export {
